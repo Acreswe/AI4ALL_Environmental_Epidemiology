@@ -1,1 +1,2 @@
-# AI4ALL_Environmental_Epidemiology
+# Environmental Epidemiologist
+Linking Agricultural Practices to Community Health
