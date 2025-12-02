@@ -9,6 +9,15 @@ from xgboost import XGBRegressor
 import pickle
 import os
 
+# Check if we're in root or streamlit folder
+if os.path.exists('streamlit'):
+    # We're in root, need to look in streamlit folder
+    MODEL_DIR = 'streamlit/'
+else:
+    # We're in streamlit folder already
+    MODEL_DIR = ''
+
+st.write(f"Looking for models in: {MODEL_DIR or 'current directory'}")
 
 # DEBUG: Show what files Streamlit Cloud sees
 st.write("### 🔍 Debug Info")
@@ -44,16 +53,16 @@ def load_models():
     
     model_files = {
         'Linear Regression': {
-            'model': 'linear_regression.pkl',
-            'info': 'linear_regression_info.pkl'
+            'model': f'{MODEL_DIR}linear_regression.pkl',
+            'info': f'{MODEL_DIR}linear_regression_info.pkl'
         },
         'Random Forest': {
-            'model': 'random_forest.pkl',
-            'info': 'random_forest_info.pkl'
+            'model': f'{MODEL_DIR}random_forest.pkl',
+            'info': f'{MODEL_DIR}random_forest_info.pkl'
         },
         'XGBoost': {
-            'model': 'xgboost.pkl',
-            'info': 'xgboost_info.pkl'
+            'model': f'{MODEL_DIR}xgboost.pkl',
+            'info': f'{MODEL_DIR}xgboost_info.pkl'
         }
     }
     
