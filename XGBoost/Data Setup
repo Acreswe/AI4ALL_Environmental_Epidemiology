@@ -1,0 +1,100 @@
+Data Setup Guide
+
+This analysis requires 3 CSV data files to run. Follow these steps to set up your environment.
+
+STEP 1: CREATE DATA FOLDER
+
+Create a folder named "Datasets" in your project directory (same location as the notebook file).
+
+Windows/Mac: Right-click > New Folder > Name it "Datasets"
+Command Line: mkdir Datasets
+
+STEP 2: REQUIRED DATA FILES
+
+You need these 3 files in your Datasets folder:
+
+File 1: historical_data_2000_2022_filtered.csv
+- Contains: Pesticide usage records for California counties
+- Size: ~1.1 million records (80-120 MB)
+- Columns: YEAR, CHEM_CODE, TOTAL_LBS_AI, TOTAL_ACRES_TREATED, COUNTY_NAME
+
+File 2: copd_aqi_poverty_demographics.csv
+- Contains: Health outcomes and demographic data
+- Size: ~1,300 rows (100-200 KB)
+- Columns: Counties, Year, Median AQI, age demographics, race/ethnicity percentages, COPD_Hospitalization_Rate (target variable), poverty and income data
+
+File 3: Population_Census_Numbers_2000_2025.csv
+- Contains: County population data by year
+- Size: ~1,500 rows (50-100 KB)
+- IMPORTANT: This file comes as a ZIP archive and must be extracted before use
+- Extract the ZIP file into your Datasets folder
+
+STEP 3: VERIFY FOLDER STRUCTURE
+
+Your project should look like this:
+
+your-project-folder/
+    XGBoost_pesticide_copd_analysis_Completed.ipynb
+    requirements.txt
+    DATA_SETUP.md
+    .gitignore
+    Datasets/
+        historical_data_2000_2022_filtered.csv
+        copd_aqi_poverty_demographics.csv
+        Population_Census_Numbers_2000_2025.csv
+
+STEP 4: UPDATE NOTEBOOK PATHS
+
+Open the notebook and go to Cell 2. Replace the long file paths with:
+
+df_pesticides2 = pd.read_csv('Datasets/historical_data_2000_2022_filtered.csv')
+df_confounders = pd.read_csv('Datasets/copd_aqi_poverty_demographics.csv')
+df_population = pd.read_csv('Datasets/Population_Census_Numbers_2000_2025.csv')
+
+Save the notebook after making changes.
+
+DATA SOURCES
+
+Pesticide data: California Department of Pesticide Regulation (https://www.cdpr.ca.gov/docs/pur/purmain.htm)
+Health data: California Health and Human Services Open Data Portal (https://data.chhs.ca.gov/)
+Demographics: U.S. Census Bureau (https://www.census.gov/data.html)
+Air quality: EPA Air Quality System (https://www.epa.gov/outdoor-air-quality-data)
+
+ANALYSIS COVERAGE
+
+Geographic: 53 California counties (excludes Alpine, Lassen, Modoc, Mono, Sierra due to missing data)
+Time period: 2000-2022 raw data, 2005-2022 for analysis
+Total observations: 943 county-year combinations after cleaning
+
+TROUBLESHOOTING
+
+Problem: FileNotFoundError
+Solution: Check that files are in Datasets folder, file names match exactly (including capitalization), and you updated the notebook paths
+
+Problem: ZIP file won't extract
+Solution: Right-click > Extract All (Windows) or double-click (Mac), then move CSV to Datasets folder
+
+Problem: ModuleNotFoundError
+Solution: Run "pip install -r requirements.txt" to install required packages
+
+Problem: Incorrect results
+Solution: Verify all 3 files are correct, population file was extracted from ZIP, files are from 2000-2022 time period
+
+SYSTEM REQUIREMENTS
+
+Python 3.8 or higher
+4 GB RAM minimum (8 GB recommended)
+500 MB free storage
+Expected runtime: 30-60 seconds
+
+INSTALLATION
+
+Install required packages:
+pip install -r requirements.txt
+
+Run the notebook:
+Open XGBoost_pesticide_copd_analysis_Completed.ipynb and run all cells
+
+NOTE
+
+Data files are not included in this repository due to file size constraints and licensing restrictions. All data is publicly available from government sources listed above.
