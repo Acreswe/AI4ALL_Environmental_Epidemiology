@@ -120,11 +120,21 @@ except Exception as e:
         },
         'XGBoost': {
             'feature_names': [
-                'Total_Pest_Intensity_Lag_5', 'Farm_Density_Lag_5',
-                'Median AQI', 'Poverty_AllAges_Percent_Est'
+                'total_population', 'total_pesticide_lbs_per_100k',
+                'total_acres_treated_per_100k', 'total_pesticide_lbs_per_100k_lag1',
+                'total_pesticide_lbs_per_100k_lag2', 'total_acres_treated_per_100k_lag1',
+                'total_acres_treated_per_100k_lag2',
+                'total_pesticide_lbs_per_100k_cumulative_mean5year',
+                'total_pesticide_lbs_per_100k_cumulative_mean20year',
+                'total_acres_treated_per_100k_cumulative_mean5year',
+                'total_acres_treated_per_100k_cumulative_mean20year',
+                'median aqi', 'pct_under_18', 'pct_18_64', 'pct_65_plus', 'median_age',
+                'pct_ai/an', 'pct_asian', 'pct_black', 'pct_latino', 'pct_multi_race',
+                'pct_nh/pi', 'pct_white', 'poverty_allages_percent_est', 
+                'median_household_income_est'
             ],
-            'description': 'Demo model - customize with your actual features',
-            'metrics': {'r2': 0.0, 'rmse': 0.0, 'mae': 0.0}
+            'description': 'XGBoost with 1-2yr lags, 5yr & 20yr cumulative exposure, demographics. Trained 2005-2022 (n=943).',
+            'metrics': {'r2': 0.5895, 'rmse': 6.51, 'mae': 4.43, 'train_r2': 0.7242, 'train_rmse': 4.42}
         }
     }
     available_models = list(models.keys())
@@ -147,9 +157,16 @@ if model_choice in model_info:
     if 'metrics' in model_info[model_choice]:
         metrics = model_info[model_choice]['metrics']
         if metrics.get('r2', 0) > 0:  # Only show if real metrics exist
-            st.sidebar.metric("R² Score", f"{metrics['r2']:.3f}")
-            st.sidebar.metric("RMSE", f"{metrics['rmse']:.2f}")
-            st.sidebar.metric("MAE", f"{metrics['mae']:.2f}")
+            st.sidebar.metric("R² Score (Test)", f"{metrics['r2']:.3f}")
+            st.sidebar.metric("RMSE (Test)", f"{metrics['rmse']:.2f}")
+            st.sidebar.metric("MAE (Test)", f"{metrics['mae']:.2f}")
+            
+            # Show overfitting info for XGBoost
+            if model_choice == 'XGBoost' and 'train_r2' in metrics:
+                r2_gap = metrics['train_r2'] - metrics['r2']
+                st.sidebar.metric("Overfitting Gap (R²)", f"{r2_gap:.3f}", 
+                                  delta="Moderate" if r2_gap > 0.1 else "Minimal",
+                                  delta_color="inverse")
 
 # Feature input section
 st.header("📊 Input Features")
@@ -632,6 +649,35 @@ if st.button("🔮 Make Prediction", type="primary"):
             st.pyplot(fig)
         except Exception as e:
             st.info(f"Feature importance not available: {str(e)}")
+    # XGBoost Model Insights
+if model_choice == "XGBoost":
+    with st.expander("🔬 XGBoost Model Insights"):
+        st.markdown("""
+        ### Key Findings from Your Analysis:
+        
+        **Model Performance:**
+        - Test R² = 0.5895 (explains 59% of variance)
+        - Moderate overfitting detected (Train R² = 0.7242)
+        - 36% improvement over naive baseline
+        
+        **Top Predictive Features:**
+        1. **20-year cumulative pesticide exposure** (strongest predictor)
+        2. Median household income (socioeconomic factor)
+        3. 20-year cumulative acres treated
+        4. 5-year pesticide exposure averages
+        5. American Indian/Alaska Native population %
+        
+        **Evidence for Pesticide-COPD Link:**
+        - Pesticide features account for ~46% of model's predictive power
+        - Long-term cumulative exposure (20-year windows) shows stronger associations than short-term
+        - Results control for air quality, poverty, demographics, and income
+        
+        **Methodology:**
+        - Random train/test split (80/20) with year as feature
+        - Temporal lag features (1-2 years) capture delayed health effects
+        - Cumulative exposure windows (5 & 20 years) capture chronic exposure
+        - Data span: 2005-2022 across 53 California counties
+        """)
 
 # Model Comparison Section
 st.header("⚖️ Model Comparison")
