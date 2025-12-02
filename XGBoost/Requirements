@@ -1,0 +1,16 @@
+# XGBoost Pesticide-COPD Analysis - Python Dependencies
+# Install all packages: pip install -r requirements.txt
+
+# Core Data Processing
+pandas==2.1.4
+numpy==1.26.2
+
+# Machine Learning
+xgboost==2.0.3
+scikit-learn==1.3.2
+
+# Statistical Analysis
+scipy==1.11.4
+
+# Visualization
+matplotlib==3.8.2
