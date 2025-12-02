@@ -715,10 +715,8 @@ with st.expander("ℹ️ About This Project"):
     - **Random Forest**: Ensemble method capturing non-linear patterns
     - **XGBoost**: Gradient boosting for optimal predictive performance
     
-    **Note**: This is a demonstration. Replace dummy data with actual trained models 
-    and real features from your dataset.
     """)
 
 # Footer
 st.markdown("---")
-st.markdown("*Developed for AI4ALL Ignite Program | Oregon State University*")
+st.markdown("*Developed for AI4ALL Ignite Program*")
