@@ -1,0 +1,275 @@
+# =============================================================================
+# XGBoost Pesticide-COPD Analysis - Git Ignore Configuration
+# =============================================================================
+# This file tells Git which files/folders to ignore (not upload to GitHub)
+#
+# WHY: Data files are large, sensitive, or user-specific
+# WHAT: Prevents accidental upload of data, temporary files, and system files
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# DATA FILES - DO NOT UPLOAD
+# -----------------------------------------------------------------------------
+# Your data files should NEVER be uploaded to GitHub
+# Reason: Large size, licensing restrictions, privacy
+
+Datasets/
+XGBoost/
+data/
+*.csv
+*.xlsx
+*.xls
+*.zip
+*.json
+*.parquet
+
+# Temporary data processing files
+*_temp.csv
+*_backup.csv
+scratch/
+temp_data/
+
+# -----------------------------------------------------------------------------
+# JUPYTER NOTEBOOK FILES
+# -----------------------------------------------------------------------------
+# Checkpoint files created automatically by Jupyter
+
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+**/.ipynb_checkpoints/
+
+# Notebook outputs (optional - remove if you want to keep outputs)
+# *.ipynb
+
+# -----------------------------------------------------------------------------
+# PYTHON RUNTIME FILES
+# -----------------------------------------------------------------------------
+# Python creates these automatically - no need to upload
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments (each user creates their own)
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+*/venv/
+*/ENV/
+
+# Python build artifacts
+dist/
+build/
+*.egg-info/
+*.egg
+MANIFEST
+
+# -----------------------------------------------------------------------------
+# MACHINE LEARNING MODEL FILES
+# -----------------------------------------------------------------------------
+# Trained models are often large and system-specific
+
+models/
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.pth
+*.onnx
+checkpoints/
+
+# Model training outputs
+training_logs/
+tensorboard/
+wandb/
+mlruns/
+
+# -----------------------------------------------------------------------------
+# IDE AND EDITOR FILES
+# -----------------------------------------------------------------------------
+# Configuration files specific to your text editor/IDE
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+
+# Jupyter Lab
+.jupyter/
+.local/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*.swn
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# -----------------------------------------------------------------------------
+# OPERATING SYSTEM FILES
+# -----------------------------------------------------------------------------
+# System files that don't need version control
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+.directory
+.Trash-*
+.nfs*
+
+# -----------------------------------------------------------------------------
+# LOG FILES AND DEBUG OUTPUT
+# -----------------------------------------------------------------------------
+# Runtime logs and debug information
+
+*.log
+logs/
+*.out
+*.err
+debug/
+*.debug
+
+# Application logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# -----------------------------------------------------------------------------
+# DOCUMENTATION BUILD FILES
+# -----------------------------------------------------------------------------
+# Generated documentation (can be rebuilt)
+
+docs/_build/
+site/
+.sphinx/
+*.pdf
+*.docx
+*.pptx
+
+# -----------------------------------------------------------------------------
+# TESTING AND COVERAGE FILES
+# -----------------------------------------------------------------------------
+# Test outputs and coverage reports
+
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+
+# -----------------------------------------------------------------------------
+# ENVIRONMENT AND CONFIGURATION
+# -----------------------------------------------------------------------------
+# Sensitive configuration files with API keys, passwords, etc.
+
+.env
+.env.local
+.env.*.local
+secrets.yaml
+config_local.py
+credentials.json
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# -----------------------------------------------------------------------------
+# RESEARCH AND ANALYSIS OUTPUTS
+# -----------------------------------------------------------------------------
+# Generated plots, results, reports
+
+outputs/
+results/
+figures/
+plots/
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.pdf
+
+# Analysis artifacts
+analysis_results/
+interim_results/
+scratch_work/
+
+# -----------------------------------------------------------------------------
+# MISCELLANEOUS
+# -----------------------------------------------------------------------------
+
+# Compressed archives
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Backup files
+*~
+*.bak
+*.backup
+*.old
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Package manager files (if using Anaconda)
+*.conda
+.conda/
+
+# -----------------------------------------------------------------------------
+# END OF .gitignore
+# -----------------------------------------------------------------------------
+#
+# REMINDER: If you need to upload a specific ignored file, you can force-add it:
+#   git add -f path/to/file
+#
+# To check what's being ignored in your repo:
+#   git status --ignored
+#
+# =============================================================================
