@@ -103,12 +103,24 @@ st.markdown("""
         font-size: 1.5rem !important;
         font-weight: 500 !important;
         margin-bottom: var(--space-md);
+        color: var(--dark-gray) !important;
+    }
+    
+    /* Subheaders in feature sections */
+    [data-testid="column"] h3 {
+        color: var(--white) !important;
     }
     
     p {
         color: var(--dark-gray);
         line-height: 1.6;
         font-size: 1rem;
+    }
+    
+    /* Labels - light/dark mode friendly */
+    label, .stMarkdown label {
+        color: #E8E8ED !important;
+        font-weight: 500 !important;
     }
     
     /* === BUTTONS - Apple style === */
@@ -498,9 +510,13 @@ if model_choice in model_info:
             if model_choice == 'XGBoost' and 'train_r2' in metrics:
                 r2_gap = metrics['train_r2'] - metrics['r2']
                 gap_label = "Moderate" if r2_gap > 0.1 else "Minimal"
-                st.sidebar.metric("Overfitting", gap_label, 
-                                  delta=f"ΔR²: {r2_gap:.3f}",
-                                  delta_color="inverse")
+                st.sidebar.metric(
+                    "Overfitting", 
+                    gap_label,
+                    delta=f"ΔR² = {r2_gap:.4f}",
+                    delta_color="inverse",
+                    help="Train R² - Test R². Lower is better."
+                )
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📖 Quick Guide")
