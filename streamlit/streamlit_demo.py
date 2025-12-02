@@ -19,43 +19,287 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for better aesthetics
+# Custom CSS - Premium design inspired by Apple and Dia
 st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* Global styles */
+    * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    /* Main container */
     .main {
-        padding: 0rem 1rem;
+        padding: 0rem 2rem;
+        background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
     }
-    .stMetric {
-        background-color: #f0f2f6;
-        padding: 15px;
-        border-radius: 10px;
+    
+    .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        max-width: 1200px;
     }
-    .stAlert {
-        border-radius: 10px;
-    }
+    
+    /* Headers */
     h1 {
-        color: #1f77b4;
-        padding-bottom: 20px;
+        font-weight: 700;
+        font-size: 3rem !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        padding-bottom: 1.5rem;
+        letter-spacing: -0.02em;
     }
+    
     h2 {
-        color: #2c3e50;
-        padding-top: 20px;
+        font-weight: 600;
+        font-size: 1.8rem !important;
+        color: #1a202c;
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+        letter-spacing: -0.01em;
     }
+    
+    h3 {
+        font-weight: 600;
+        font-size: 1.3rem !important;
+        color: #2d3748;
+        letter-spacing: -0.01em;
+    }
+    
+    /* Metrics - Glass morphism effect */
+    .stMetric {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 1.5rem;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .stMetric:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
+    }
+    
+    .stMetric label {
+        font-size: 0.875rem !important;
+        font-weight: 500 !important;
+        color: #718096 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    
+    .stMetric [data-testid="stMetricValue"] {
+        font-size: 2rem !important;
+        font-weight: 700 !important;
+        color: #1a202c !important;
+    }
+    
+    /* Buttons - Modern gradient with hover effect */
     .stButton>button {
         width: 100%;
+        height: 3.5rem;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        color: white;
+        box-shadow: 0 4px 15px 0 rgba(102, 126, 234, 0.4);
+        transition: all 0.3s ease;
+        letter-spacing: 0.02em;
+    }
+    
+    .stButton>button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px 0 rgba(102, 126, 234, 0.6);
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+    
+    .stButton>button:active {
+        transform: translateY(0px);
+    }
+    
+    /* Alerts and info boxes */
+    .stAlert {
+        border-radius: 12px;
+        border-left: 4px solid #667eea;
+        background: rgba(102, 126, 234, 0.05);
+        backdrop-filter: blur(10px);
+        padding: 1rem 1.5rem;
+    }
+    
+    /* Input fields */
+    .stNumberInput>div>div>input,
+    .stSlider>div>div>div>input {
+        border-radius: 8px;
+        border: 1.5px solid #e2e8f0;
+        transition: border-color 0.3s ease;
+        font-weight: 500;
+    }
+    
+    .stNumberInput>div>div>input:focus,
+    .stSlider>div>div>div>input:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    /* Sidebar */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #1a202c 0%, #2d3748 100%);
+        padding-top: 2rem;
+    }
+    
+    [data-testid="stSidebar"] .stMetric {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    [data-testid="stSidebar"] .stMetric label {
+        color: #a0aec0 !important;
+    }
+    
+    [data-testid="stSidebar"] .stMetric [data-testid="stMetricValue"] {
+        color: #ffffff !important;
+    }
+    
+    [data-testid="stSidebar"] h1,
+    [data-testid="stSidebar"] h2,
+    [data-testid="stSidebar"] h3 {
+        color: #ffffff;
+    }
+    
+    [data-testid="stSidebar"] .stMarkdown {
+        color: #e2e8f0;
+    }
+    
+    /* Selectbox */
+    .stSelectbox>div>div {
+        border-radius: 12px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+    }
+    
+    /* Dataframes */
+    .dataframe {
+        border-radius: 12px;
+        overflow: hidden;
+        border: none !important;
+        box-shadow: 0 4px 20px 0 rgba(31, 38, 135, 0.1);
+    }
+    
+    /* Expanders */
+    .streamlit-expanderHeader {
+        background: rgba(102, 126, 234, 0.05);
+        border-radius: 12px;
+        font-weight: 600;
+        color: #1a202c;
+        border: 1px solid rgba(102, 126, 234, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .streamlit-expanderHeader:hover {
+        background: rgba(102, 126, 234, 0.1);
+        border-color: rgba(102, 126, 234, 0.2);
+    }
+    
+    /* Horizontal rule */
+    hr {
+        margin: 2.5rem 0;
+        border: none;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+    }
+    
+    /* Columns */
+    [data-testid="column"] {
+        padding: 0.5rem;
+    }
+    
+    /* Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        border-radius: 8px;
+        padding: 0.5rem 1.5rem;
+        font-weight: 600;
+    }
+    
+    /* Slider */
+    .stSlider [data-testid="stTickBar"] {
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        height: 4px;
+        border-radius: 2px;
+    }
+    
+    /* Code blocks */
+    code {
+        background: rgba(102, 126, 234, 0.08);
+        padding: 0.2rem 0.5rem;
+        border-radius: 6px;
+        font-family: 'SF Mono', Monaco, monospace;
+        font-size: 0.9em;
+        font-weight: 500;
+        color: #667eea;
+    }
+    
+    /* Scrollbar customization */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
         border-radius: 10px;
-        height: 3em;
-        font-weight: bold;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #764ba2, #667eea);
+    }
+    
+    /* Tooltips */
+    [data-testid="stTooltipIcon"] {
+        color: #667eea;
+    }
+    
+    /* Footer styling */
+    footer {
+        visibility: hidden;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .element-container {
+        animation: fadeIn 0.5s ease-out;
     }
     </style>
     """, unsafe_allow_html=True)
 
 # Header
-st.title("🌾 Pesticide Exposure & COPD Hospitalization Predictor")
+st.title("🌾 Pesticide & COPD Analysis")
 st.markdown("""
-    *Machine learning models predicting respiratory health outcomes based on agricultural pesticide exposure across California counties.*
-""")
-st.markdown("---")
+    <p style='font-size: 1.2rem; color: #718096; font-weight: 400; margin-top: -1rem; margin-bottom: 2rem;'>
+    Machine learning models predicting respiratory health outcomes based on agricultural pesticide exposure across California counties.
+    </p>
+    """, unsafe_allow_html=True)
 
 @st.cache_resource
 def load_models():
@@ -171,17 +415,16 @@ if model_choice in model_info:
         metrics = model_info[model_choice]['metrics']
         if metrics.get('r2', 0) > 0:
             st.sidebar.markdown("### 📊 Model Performance")
+            st.sidebar.metric("R² (Test)", f"{metrics['r2']:.3f}")
+            st.sidebar.metric("RMSE (Test)", f"{metrics['rmse']:.2f}")
+            st.sidebar.metric("MAE (Test)", f"{metrics['mae']:.2f}")
             
-            col1, col2 = st.sidebar.columns(2)
-            with col1:
-                st.metric("R² (Test)", f"{metrics['r2']:.3f}")
-                st.metric("RMSE", f"{metrics['rmse']:.2f}")
-            with col2:
-                st.metric("MAE", f"{metrics['mae']:.2f}")
-                if model_choice == 'XGBoost' and 'train_r2' in metrics:
-                    r2_gap = metrics['train_r2'] - metrics['r2']
-                    gap_label = "Moderate" if r2_gap > 0.1 else "Minimal"
-                    st.metric("Overfit", gap_label, f"{r2_gap:.3f}")
+            if model_choice == 'XGBoost' and 'train_r2' in metrics:
+                r2_gap = metrics['train_r2'] - metrics['r2']
+                gap_label = "Moderate" if r2_gap > 0.1 else "Minimal"
+                st.sidebar.metric("Overfitting", gap_label, 
+                                  delta=f"ΔR²: {r2_gap:.3f}",
+                                  delta_color="inverse")
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📖 Quick Guide")
@@ -371,8 +614,14 @@ feature_inputs = {
 }
 
 # Feature input section
+st.markdown("<br>", unsafe_allow_html=True)
 st.header("📊 Input Features")
-st.info(f"**{model_choice}** requires {len(selected_features)} features. Adjust values below:")
+st.markdown(f"""
+    <p style='color: #4a5568; font-size: 1rem; margin-bottom: 1.5rem;'>
+    <strong>{model_choice}</strong> uses <strong>{len(selected_features)} features</strong>. 
+    Adjust the values below to generate a prediction.
+    </p>
+    """, unsafe_allow_html=True)
 
 feature_values = {}
 col1, col2 = st.columns(2)
@@ -447,11 +696,13 @@ with col2:
 
 features = np.array([[feature_values[f] for f in selected_features]])
 
-st.markdown("---")
+st.markdown("<br><br>", unsafe_allow_html=True)
 
 # Prediction
 if st.button("🔮 Generate Prediction", type="primary"):
+    st.markdown("<br>", unsafe_allow_html=True)
     st.header("📈 Prediction Results")
+    st.markdown("<br>", unsafe_allow_html=True)
     
     selected_model = models[model_choice]
     
@@ -770,10 +1021,21 @@ with st.expander("ℹ️ About This Project"):
     """)
 
 # Footer
-st.markdown("---")
+st.markdown("<br><br>", unsafe_allow_html=True)
 st.markdown(
-    "<div style='text-align: center; color: #7f8c8d;'>"
-    "🌾 Developed for AI4ALL Ignite Program | Data Science for Public Health 🏥"
-    "</div>",
+    """
+    <div style='text-align: center; padding: 2rem 0; color: #718096; font-size: 0.95rem; 
+                border-top: 1px solid rgba(102, 126, 234, 0.1); margin-top: 3rem;'>
+        <div style='margin-bottom: 0.5rem;'>
+            <span style='font-weight: 600; background: linear-gradient(135deg, #667eea, #764ba2); 
+                         -webkit-background-clip: text; -webkit-text-fill-color: transparent;'>
+                🌾 AI4ALL Ignite Program
+            </span>
+        </div>
+        <div style='font-size: 0.875rem; color: #a0aec0;'>
+            Data Science for Public Health · 2024
+        </div>
+    </div>
+    """,
     unsafe_allow_html=True
 )
