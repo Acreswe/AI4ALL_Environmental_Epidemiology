@@ -5,6 +5,11 @@ This project investigates whether long-term pesticide exposure contributes to in
 
 [<kbd>TEST OUT OUR MODEL ON STREAMLIT</kbd>](https://ai4allenvironmentalepidemiology.streamlit.app/)
 
+
+---
+
+<img width="648" height="864" alt="AI4ALL Poster" src="https://github.com/user-attachments/assets/06915ce2-e8e0-4a68-b261-d500d9b0e828" />
+
 ---
 
 # Problem Statement
